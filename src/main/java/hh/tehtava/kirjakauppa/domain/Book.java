@@ -20,6 +20,7 @@ public class Book {
     }
 
     public Book(Long id, String title, String author, Long publicationYear, String isbn, Long price) {
+        super();
         this.id = id;
         this.title = title;
         this.author = author;

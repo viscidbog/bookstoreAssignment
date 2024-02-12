@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import hh.tehtava.kirjakauppa.domain.Book;
-import hh.tehtava.kirjakauppa.domain.BookRepository;
+import hh.tehtava.kirjakauppa.domain.BookRepo;
 
 @SpringBootApplication
 public class KirjakauppaApplication {
@@ -20,13 +20,14 @@ public class KirjakauppaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemo(BookRepository repository) {
+	public CommandLineRunner bookDemoAdder(BookRepo repository) {
 		return (args) -> {
 			log.info("put some books in the store");
-			repository.save(new Book(title:"A Storm of Swords", author:"George R. R. Martin", publicationYear:2000, isbn:"0-00-224586-8", price:3.50 ));
+			repository.save(new Book("A Storm of Swords", "George R. R. Martin", 2000, "0-00-224586-8", 3.50 ));
 			repository.save(new Book(title:"Neuromancer", author:"William Gibson", publicationYear:1984, isbn:"	0-441-56956-0", price:15));
-			repository.save(new Book(title:""))
-		}
+			repository.save(new Book(title:""));
+			
+		};
 	}
 
 }
