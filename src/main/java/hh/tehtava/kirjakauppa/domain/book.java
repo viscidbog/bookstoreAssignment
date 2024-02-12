@@ -1,12 +1,24 @@
 package hh.tehtava.kirjakauppa.domain;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
     private String author;
     private long publicationYear;
     private String isbn;
     private long price;
+
+    public book() {
+    }
 
     public book(long id, String title, String author, long publicationYear, String isbn, long price) {
         this.id = id;
