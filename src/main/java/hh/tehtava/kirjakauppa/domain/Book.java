@@ -22,7 +22,6 @@ public class Book {
     }
 
     public Book(String title, String author, Long publicationYear, String isbn, Long price) {
-        super();
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;

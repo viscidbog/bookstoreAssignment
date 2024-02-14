@@ -3,6 +3,7 @@ package hh.tehtava.kirjakauppa.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,10 +23,21 @@ public class BookController {
         return "index";
     }
 
-    @RequestMapping(value = "/savebook", method = RequestMethod.POST)
+    @RequestMapping(value = "/addbook", method = RequestMethod.GET)
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
-        return "redirect:index";
+        return "/addbook";
+    }
 
+    @RequestMapping(value = "/savebook", method = RequestMethod.POST)
+    public String save(Book book) {
+        repository.save(book);
+        return "redirect:index";
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public String deleteBook(@PathVariable("id") Long bookId, Model model) {
+        repository.deleteById(bookId);
+        return "redirect:../index";
     }
 }
