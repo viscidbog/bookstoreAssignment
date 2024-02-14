@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    // tää id voi olla vain ja ainoastaan tässä entityn teossa. jos laittaa noihin
+    // muihin constructoreihin sen
     private Long id;
     private String title;
     private String author;
@@ -19,9 +21,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long id, String title, String author, Long publicationYear, String isbn, Long price) {
+    public Book(String title, String author, Long publicationYear, String isbn, Long price) {
         super();
-        this.id = id;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;

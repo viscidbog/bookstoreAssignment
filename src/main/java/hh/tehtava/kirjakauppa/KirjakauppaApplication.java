@@ -23,10 +23,10 @@ public class KirjakauppaApplication {
 	public CommandLineRunner bookDemoAdder(BookRepo repository) {
 		return (args) -> {
 			log.info("put some books in the store");
-			repository.save(new Book("A Storm of Swords", "George R. R. Martin", 2000, "0-00-224586-8", 3.50 ));
-			repository.save(new Book(title:"Neuromancer", author:"William Gibson", publicationYear:1984, isbn:"	0-441-56956-0", price:15));
-			repository.save(new Book(title:""));
-			
+			repository.save(new Book("A Storm of Swords", "George R. R. Martin", 2000L, "0-00-224586-8", 50L));
+			repository.save(new Book("Neuromancer", "William Gibson", 1984L, "0-441-56956-0", 15L));
+			repository.save(new Book("Advanced Demonology", "Louis Cypher", 1666L, "666-666-666", 6L));
+
 		};
 	}
 
