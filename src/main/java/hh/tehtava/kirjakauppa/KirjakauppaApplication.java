@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.tehtava.kirjakauppa.domain.Book;
 import hh.tehtava.kirjakauppa.domain.BookRepo;
+import hh.tehtava.kirjakauppa.domain.CateRepo;
+import hh.tehtava.kirjakauppa.domain.Category;
 
 @SpringBootApplication
 public class KirjakauppaApplication {
@@ -26,8 +28,18 @@ public class KirjakauppaApplication {
 			repository.save(new Book("A Storm of Swords", "George R. R. Martin", 2000L, "0-00-224586-8", 50L));
 			repository.save(new Book("Neuromancer", "William Gibson", 1984L, "0-441-56956-0", 15L));
 			repository.save(new Book("Advanced Demonology", "Louis Cypher", 1666L, "666-666-666", 6L));
-
 		};
+	}
+
+	@Bean
+	public CommandLineRunner cateDemoAdder(CateRepo repository) {
+		return (args) -> {
+			log.info("insterting a few categories");
+			repository.save(new Category("Fantasy"));
+			repository.save(new Category("Sci-fi"));
+			repository.save(new Category("Non-fiction"));
+		};
+
 	}
 
 }
