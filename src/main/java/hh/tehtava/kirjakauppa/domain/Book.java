@@ -26,12 +26,13 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, Long publicationYear, String isbn, Long price) {
+    public Book(String title, String author, Long publicationYear, String isbn, Long price, Category category) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
         this.isbn = isbn;
         this.price = price;
+        this.category = category;
     }
 
     public Category getCategory() {

@@ -9,41 +9,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import hh.tehtava.kirjakauppa.domain.Book;
 import hh.tehtava.kirjakauppa.domain.BookRepo;
+import hh.tehtava.kirjakauppa.domain.CateRepo;
 
 @Controller
 public class BookController {
 
     @Autowired
-    private BookRepo repository;
+    private BookRepo brepository;
+    @Autowired
+    private CateRepo crepository;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String showIndex(Model model) {
-        System.out.println("Index endpoint");
-        model.addAttribute("books", repository.findAll());
+        model.addAttribute("books", brepository.findAll());
         return "index";
     }
 
     @RequestMapping(value = "/addbook", method = RequestMethod.GET)
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
+        model.addAttribute("categories", crepository.findAll());
         return "/addbook";
     }
 
     @RequestMapping(value = "/savebook", method = RequestMethod.POST)
     public String save(Book book) {
-        repository.save(book);
+        brepository.save(book);
         return "redirect:index";
     }
 
     @RequestMapping(value = "/delete/{bookid}", method = RequestMethod.GET)
-    public String deleteBook(@PathVariable("id") Long bookId, Model model) {
-        repository.deleteById(bookId);
+    public String deleteBook(@PathVariable("bookid") Long bookDel, Model model) {
+        brepository.deleteById(bookDel);
         return "redirect:../index";
     }
 
     @RequestMapping(value = "/editbook/{bookid}")
     public String editing(@PathVariable("bookid") Long bookId, Model model) {
-        model.addAttribute("book", repository.findById(bookId));
+        model.addAttribute("book", brepository.findById(bookId));
+        model.addAttribute("categories", crepository.findAll());
         return "/editbook";
     }
 

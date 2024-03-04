@@ -22,24 +22,24 @@ public class KirjakauppaApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookDemoAdder(BookRepo repository) {
+	public CommandLineRunner bookDemoAdder(BookRepo brepository, CateRepo crepository) {
 		return (args) -> {
+
+			Category category1 = new Category("Fantasy");
+			Category category2 = new Category("Sci-fi");
+			Category category3 = new Category("Non-fiction");
+
+			crepository.save(category1);
+			crepository.save(category2);
+			crepository.save(category3);
+
 			log.info("put some books in the store");
-			repository.save(new Book("A Storm of Swords", "George R. R. Martin", 2000L, "0-00-224586-8", 50L));
-			repository.save(new Book("Neuromancer", "William Gibson", 1984L, "0-441-56956-0", 15L));
-			repository.save(new Book("Advanced Demonology", "Louis Cypher", 1666L, "666-666-666", 6L));
-		};
-	}
+			brepository
+					.save(new Book("A Storm of Swords", "George R. R. Martin", 2000L, "0-00-224586-8", 50L, category1));
+			brepository.save(new Book("Neuromancer", "William Gibson", 1984L, "0-441-56956-0", 15L, category2));
+			brepository.save(new Book("Advanced Demonology", "Louis Cypher", 1666L, "666-666-666", 6L, category3));
 
-	@Bean
-	public CommandLineRunner cateDemoAdder(CateRepo repository) {
-		return (args) -> {
-			log.info("insterting a few categories");
-			repository.save(new Category("Fantasy"));
-			repository.save(new Category("Sci-fi"));
-			repository.save(new Category("Non-fiction"));
 		};
-
 	}
 
 }
