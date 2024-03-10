@@ -39,6 +39,16 @@ public class KirjakauppaApplication {
 			brepository.save(new Book("Neuromancer", "William Gibson", 1984L, "0-441-56956-0", 15L, category2));
 			brepository.save(new Book("Advanced Demonology", "Louis Cypher", 1666L, "666-666-666", 6L, category3));
 
+			log.info("fetch all books:");
+			for (Book book : brepository.findAll()) {
+				log.info(book.toString());
+			}
+
+			log.info("fetch all categories:");
+			for (Category category : crepository.findAll()) {
+				log.info(category.toString());
+			}
+
 		};
 	}
 
