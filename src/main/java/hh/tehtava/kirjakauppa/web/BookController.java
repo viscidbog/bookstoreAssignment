@@ -24,6 +24,13 @@ public class BookController {
     @Autowired
     private CateRepo crepository;
 
+    // Login page
+    @RequestMapping(value = "/login")
+    public String logIn() {
+        return "login";
+    }
+
+
     // Show list of books
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public String showIndex(Model model) {
