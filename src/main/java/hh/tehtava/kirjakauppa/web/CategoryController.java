@@ -1,6 +1,7 @@
 package hh.tehtava.kirjakauppa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,16 @@ public class CategoryController {
     public String save(Category category) {
         repository.save(category);
         return "redirect:categorylist";
+    }
+
+    // Delete a category by its ID value. endpoint has to be named differently from
+    // book deleter, because if they're both called the same, it returns an
+    // ambiguous handler error.
+    @RequestMapping(value = "/deletecategory/{categoryid}", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String deleteCategory(@PathVariable("categoryid") Long cateDel, Model model) throws Exception {
+        repository.deleteById(cateDel);
+        return "redirect:../categorylist";
     }
 
 }

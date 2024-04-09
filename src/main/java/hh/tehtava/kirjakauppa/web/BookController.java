@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import hh.tehtava.kirjakauppa.domain.Book;
 import hh.tehtava.kirjakauppa.domain.BookRepo;
 import hh.tehtava.kirjakauppa.domain.CateRepo;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BookController {
@@ -29,7 +29,6 @@ public class BookController {
     public String logIn() {
         return "login";
     }
-
 
     // Show list of books
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
@@ -53,9 +52,11 @@ public class BookController {
         return "redirect:index";
     }
 
-    // Delete a book by its ID value
+    // Delete a book by its ID value. End point has to be unique if other
+    // controllers have similar functionality.
     @RequestMapping(value = "/delete/{bookid}", method = RequestMethod.GET)
-    public String deleteBook(@PathVariable("bookid") Long bookDel, Model model) {
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String deleteBook(@PathVariable("bookid") Long bookDel, Model model) throws Exception {
         brepository.deleteById(bookDel);
         return "redirect:../index";
     }

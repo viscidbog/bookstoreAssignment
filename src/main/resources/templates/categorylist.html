@@ -13,7 +13,9 @@
       </tr>
       <tr th:each = "category : ${categories}">
         <td th:text="${category.name}"></td>
-
+        <td sec:authorize="hasAuthority('ADMIN')">
+        <a th:href="@{deletecategory/{categoryid}(categoryid=${category.categoryid})}" class="btn btn-danger">Delete</a>
+        </td>
       </tr>
     </table>
 
