@@ -42,7 +42,7 @@ public class BookController {
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", crepository.findAll());
-        return "/addbook";
+        return "addbook";
     }
 
     // Save a book to list
@@ -58,7 +58,7 @@ public class BookController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("bookid") Long bookDel, Model model) throws Exception {
         brepository.deleteById(bookDel);
-        return "redirect:../index";
+        return "redirect:/index";
     }
 
     // Edit a book
@@ -66,7 +66,7 @@ public class BookController {
     public String editing(@PathVariable("bookid") Long bookId, Model model) {
         model.addAttribute("book", brepository.findById(bookId));
         model.addAttribute("categories", crepository.findAll());
-        return "/editbook";
+        return "editbook";
     }
 
     // RESTful service to get all books

@@ -26,7 +26,7 @@ public class CategoryController {
     @RequestMapping(value = "/addcategory", method = RequestMethod.GET)
     public String addBook(Model model) {
         model.addAttribute("category", new Category());
-        return "/addcategory";
+        return "addcategory";
     }
 
     @RequestMapping(value = "/savecategory", method = RequestMethod.POST)
@@ -42,7 +42,7 @@ public class CategoryController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteCategory(@PathVariable("categoryid") Long cateDel, Model model) throws Exception {
         repository.deleteById(cateDel);
-        return "redirect:../categorylist";
+        return "redirect:/categorylist";
     }
 
 }
